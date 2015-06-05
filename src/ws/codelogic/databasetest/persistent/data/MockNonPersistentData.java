@@ -1,23 +1,36 @@
 package ws.codelogic.databasetest.persistent.data;
 
-import java.util.ArrayList;
-
 public class MockNonPersistentData implements PersistentData{
 
     String[] titles;
+    String[] notes;
     int pointer = 0;
 
-    public MockNonPersistentData(){
-        titles = new String[5];
+    public static MockNonPersistentData createWithCapacity5(){
+        return new MockNonPersistentData(5);
+    }
+
+    private MockNonPersistentData(int size){
+        titles = new String[size];
+        notes = new String[size];
     }
 
     @Override
-    public void insert(String title, String note) {
-        titles[pointer++] = title;
+    public void insert(Note note) {
+        notes[pointer] = note.getContent();
+        titles[pointer] = note.getTitle();
+        pointer++;
     }
 
     @Override
     public String[] getTitles() {
             return titles;
     }
+
+    @Override
+    public Note getNote(int i) {
+        return new Note(titles[i], notes[i]);
+    }
+
+
 }

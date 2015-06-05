@@ -2,7 +2,6 @@ package ws.codelogic.databasetest.persistent.data;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class MockNonPersistentDataTest {
@@ -11,35 +10,30 @@ public class MockNonPersistentDataTest {
 
     @Before
     public void setUp(){
-        data = new MockNonPersistentData();
+        data = MockNonPersistentData.createWithCapacity5();
     }
 
     @Test
-    public void insertData(){
-        data.insert("My Title", "My content");
+    public void insertAnObject_ObjectShouldAppearOnNoteList() {
+        String title = "test title";
+        insert(title, "");
+        String[] list = data.getTitles();
+        assertEquals(list[0], title);
     }
 
     @Test
-    public void insertedDataIsInList() {
-        String title = "testTitle";
-        data.insert(title, "empty");
-        String[] titles = data.getTitles();
-        assertEquals(title, titles[0]);
+    public void insertANote_GetFullNoteBack() {
+        String title = "test2";
+        String noteText = "my note";
+        insert(title, noteText);
+        Note note = data.getNote(0);
+        assertEquals(note.getTitle(), title);
+        assertEquals(note.getContent(), noteText);
     }
 
-    @Test
-    public void multiInsert_titleListYieldsNewTitles(){
-        String[] testTitles = {"title1", "title2", "title3"};
-        insertMulti(testTitles);
-        String[] resultingTitles = data.getTitles();
-        assertEquals(testTitles[0], resultingTitles[0]);
-        assertEquals(testTitles[1], resultingTitles[1]);
-        assertEquals(testTitles[2], resultingTitles[2]);
+    private void insert(String title, String noteText) {
+        data.insert(new Note(title, noteText));
     }
 
-    private void insertMulti(String[] testTitles) {
-        for(String s : testTitles)
-            data.insert(s, "dummy");
-    }
 
 }
