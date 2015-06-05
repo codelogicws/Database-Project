@@ -6,8 +6,8 @@ public class MockNonPersistentData implements PersistentData{
     String[] notes;
     int pointer = 0;
 
-    public static MockNonPersistentData createWithCapacity5(){
-        return new MockNonPersistentData(5);
+    public static MockNonPersistentData createWithCapacity(int capacity){
+        return new MockNonPersistentData(capacity);
     }
 
     private MockNonPersistentData(int size){

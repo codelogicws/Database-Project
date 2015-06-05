@@ -17,4 +17,8 @@ public class Note {
     public String getContent() {
         return note;
     }
+
+    public String toString(){
+        return title + " " + note;
+    }
 }

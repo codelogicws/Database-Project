@@ -6,4 +6,6 @@ public interface PersistentData {
     String[] getTitles();
     Note getNote(int i);
 
+    class OverCapacity extends RuntimeException {
+    }
 }
