@@ -1,4 +1,4 @@
-package ws.codelogic.databasetest;
+package ws.codelogic.databasetest.persistent.data;
 import java.sql.*;
 import java.util.Scanner;
 
