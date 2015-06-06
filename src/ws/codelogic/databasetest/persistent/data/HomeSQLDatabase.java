@@ -14,21 +14,21 @@ public class HomeSQLDatabase implements PersistentData{
 
     public static HomeSQLDatabase createHomeSQLDatabase(){
         String password = getPassword();
-        return new HomeSQLDatabase("68.4.153.128", "SQLEXPRESS", "codelogic.ws", "sa", password);
+        return new HomeSQLDatabase("68.4.153.128", "SQLEXPRESS", "codelogic.ws", "sa", "1433", password);
     }
 
-    private HomeSQLDatabase(String ip, String view, String database, String user, String password){
+    private HomeSQLDatabase(String ip, String view, String database, String user, String port, String password){
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String connectionUrl = "jdbc:sqlserver://" + ip +"\\" + view + ";" +
+            String connectionUrl = "jdbc:sqlserver://" + ip + "\\" + view + ":" + port +  ";" +
                     "database="+ database + ";"+
                     "user="+user+";" +
                     "password=" + password + ";";
             connection = DriverManager.getConnection(connectionUrl);
             System.out.println("Connected");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -54,9 +54,8 @@ public class HomeSQLDatabase implements PersistentData{
 
     private void doStatement(String command) {
         System.out.println("Debug-HomeSQLDatabase: attempted command " + command);
-        Statement statement = null;
         try {
-            statement = connection.createStatement();
+            Statement statement = connection.createStatement();
             statement.execute(command);
         } catch (SQLException e) {
             e.printStackTrace();

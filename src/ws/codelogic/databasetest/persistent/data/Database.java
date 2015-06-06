@@ -11,7 +11,7 @@ public class Database {
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
-            String connectionUrl = "jdbc:sqlserver://68.4.153.128\\SQLEXPRESS;" +
+            String connectionUrl = "jdbc:sqlserver://68.4.153.128:1433\\SQLEXPRESS;" +
                     "database=codelogic.ws;" +
                     "user=sa;" +
                     "password=" + password;
