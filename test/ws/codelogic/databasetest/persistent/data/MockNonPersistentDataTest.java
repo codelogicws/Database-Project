@@ -2,6 +2,7 @@ package ws.codelogic.databasetest.persistent.data;
 
 import org.junit.Before;
 import org.junit.Test;
+import ws.codelogic.databasetest.data.Note;
 
 import java.util.HashMap;
 

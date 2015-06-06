@@ -1,5 +1,7 @@
 package ws.codelogic.databasetest.persistent.data;
 
+import ws.codelogic.databasetest.data.Note;
+
 public class MockNonPersistentData implements PersistentData{
 
     String[] titles;

@@ -1,4 +1,4 @@
-package ws.codelogic.databasetest.persistent.data;
+package ws.codelogic.databasetest.data;
 
 public class Note {
 
