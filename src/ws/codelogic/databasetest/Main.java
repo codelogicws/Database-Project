@@ -5,9 +5,11 @@ import ws.codelogic.databasetest.persistent.data.MySQLHome;
 import ws.codelogic.databasetest.persistent.data.PersistentData;
 
 public class Main {
+
     public static void main(String[] args){
         PersistentData persistentData = MySQLHome.createHomeSQLDatabase();
-        Note myNote = new Note("Java Note", "This is my note done from inside the java language");
+        Note myNote = new Note("Over the Internet", "Command sent from over the internet on this one");
         persistentData.insert(myNote);
     }
+
 }

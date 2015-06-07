@@ -23,11 +23,12 @@ public class MySQLHome implements PersistentData{
         try{
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://" +
-                    "192.168.0.55" +
+                    "68.4.153.128" +
                     "/db_app?" +
                     "user=app&" +
                     "password=" +
-                    password);
+                    password +
+                    "&noAccessToProcedureBodies=true");
             createCallableStatements();
             statement = connection.createStatement();
 
