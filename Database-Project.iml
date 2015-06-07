@@ -8,8 +8,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="sqljdbc4" level="project" />
-    <orderEntry type="library" name="External Libraries" level="application" />
-    <orderEntry type="library" name="sqljdbc41" level="project" />
+    <orderEntry type="library" name="JUnit" level="project" />
+    <orderEntry type="library" name="MySQL Driver" level="project" />
   </component>
 </module>
