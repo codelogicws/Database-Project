@@ -14,7 +14,7 @@ public class HomeSQLDatabase implements PersistentData{
 
     public static HomeSQLDatabase createHomeSQLDatabase(){
         String password = getPassword();
-        return new HomeSQLDatabase("68.4.153.128", "SQLEXPRESS", "codelogic.ws", "sa", "1433", password);
+        return new HomeSQLDatabase("68.4.153.128", "SQLEXPRESS", "codelogic.ws", "sa", "5577", password);
     }
 
     private HomeSQLDatabase(String ip, String view, String database, String user, String port, String password){
