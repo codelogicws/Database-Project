@@ -82,19 +82,17 @@ public class ListFrame extends JFrame {
     }
 
     private void createButtonPairForNote(String name, GridBagConstraints gbc) {
-        gbc.gridx = 0;
+        addButtonToCluster(name, gbc, 0, noteButtons);
+        addButtonToCluster("delete", gbc, 1, deleteButtons);
+        gbc.gridy++;
+    }
+
+    private void addButtonToCluster(String name, GridBagConstraints gbc, int x, ArrayList<JButton> buttons) {
+        gbc.gridx = x;
         JButton button = new JButton(name);
         mainPanel.add(button, gbc);
         button.addActionListener(handler);
-        noteButtons.add(button);
-
-        gbc.gridx = 1;
-        JButton delete = new JButton("delete");
-        mainPanel.add(delete, gbc);
-        delete.addActionListener(handler);
-        deleteButtons.add(delete);
-
-        gbc.gridy++;
+        buttons.add(button);
     }
 
     private void SetUpSouthPanel() {
