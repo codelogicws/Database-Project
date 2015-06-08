@@ -12,8 +12,6 @@ public class MySQLHome implements PersistentData{
     private CallableStatement addNote;
     private CallableStatement removeNote;
     private int[] lastKnowenIds;
-    private static final String TITLETABLE = "title";
-    private static final String NOTETABLE = "note";
 
     public static MySQLHome mySQLHomeSingleton(){
         if(mySQLHome == null){
@@ -134,14 +132,15 @@ public class MySQLHome implements PersistentData{
     public String[] getTitles() {
         String[] titles = null;
         try {
-            titles = doGetTitle(titles);
+            titles = doGetTitle();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return titles;
     }
 
-    private String[] doGetTitle(String[] titles) throws SQLException {
+    private String[] doGetTitle() throws SQLException {
+        String[] titles = null;
         Statement newStatement = connection.createStatement();
         ResultSet newResults = newStatement.executeQuery("SELECT id, title FROM title");
         int tableCount = getTableCount();
@@ -157,7 +156,7 @@ public class MySQLHome implements PersistentData{
         return titles;
     }
 
-    public int getTableCount(){
+    private int getTableCount(){
         int count = 0;
         try {
             count = doTableCount(count);

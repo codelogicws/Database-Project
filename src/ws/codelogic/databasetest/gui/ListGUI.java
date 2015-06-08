@@ -5,7 +5,7 @@ import javax.swing.*;
 public class ListGUI {
 
     private static ListGUI listGUI;
-    public ListFrame frame;
+    private ListFrame frame;
 
     public static ListGUI listSingleton(){
         if(listGUI == null)
