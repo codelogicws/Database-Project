@@ -2,8 +2,8 @@ package ws.codelogic.databasetest.data;
 
 public class Note {
 
-    private String title;
-    private String note;
+    private final String title;
+    private final String note;
 
     public Note(String title, String note) {
         this.title = title;

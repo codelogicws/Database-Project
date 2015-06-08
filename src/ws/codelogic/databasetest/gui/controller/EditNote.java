@@ -12,8 +12,8 @@ import java.awt.event.ActionListener;
 public class EditNote {
     private PersistentData pd;
     private EditGUI editFrame;
-    private Note note;
-    private int noteIndex;
+    private final Note note;
+    private final int noteIndex;
 
     public EditNote(int noteIndex, Note note){
         this.note = note;

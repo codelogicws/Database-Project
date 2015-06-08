@@ -19,7 +19,7 @@ public class ListFrame extends JFrame {
     private JScrollPane scrollPane;
     private GridBagConstraints gbc;
     private Handler handler;
-    private PersistentData pd;
+    private final PersistentData pd;
     private ArrayList<JButton> noteButtons;
     private ArrayList<JButton> deleteButtons;
     private JButton createButton;

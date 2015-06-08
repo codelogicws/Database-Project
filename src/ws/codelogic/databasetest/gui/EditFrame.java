@@ -5,17 +5,18 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class EditFrame extends JFrame {
+    private static final String TITLE = "Database Note Access";
     private Container mainContainer;
     private final String note;
-    private String titleOfNote;
+    private final String titleOfNote;
     private JTextField textField;
     private JTextArea textArea;
     private JButton save;
-    private ActionListener handler;
+    private final ActionListener handler;
     private JScrollPane testAreaScroll;
 
-    public EditFrame(String title, String titleOfNote, String note, ActionListener handler) {
-        super(title);
+    public EditFrame(String titleOfNote, String note, ActionListener handler) {
+        super(TITLE);
         this.handler = handler;
         this.titleOfNote = titleOfNote;
         this.note = note;

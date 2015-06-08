@@ -9,7 +9,7 @@ public class EditGUI {
 
     public void makeWindow(String title, String note, ActionListener handler){
 
-        frame = new EditFrame("Note Access", title, note, handler);
+        frame = new EditFrame(title, note, handler);
         SwingUtilities.invokeLater(listWindow());
 
     }
