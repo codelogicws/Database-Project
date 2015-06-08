@@ -32,14 +32,18 @@ public class ListFrame extends JFrame {
     }
 
     public void refresh() {
-        //Action Listener
         handler = new Handler();
+        setUpMainContainer();
+        SetUpScrollPanel();
+        SetUpSouthPanel();
+    }
 
-        //Main Container
+    private void setUpMainContainer() {
         setLayout(new BorderLayout());
         mainContainer = getContentPane();
+    }
 
-        //ScrollPanel
+    private void SetUpScrollPanel() {
         removeOldComponents();
         noteButtons = new ArrayList<>();
         deleteButtons = new ArrayList<>();
@@ -48,26 +52,10 @@ public class ListFrame extends JFrame {
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(5,5,5,5);
         gbc.gridy = 0;
-        allButtonCreation();
+        createButtons(pd.getTitles(), gbc);
         mainPanel.setBounds(5,5,300, 200);
         scrollPane = new JScrollPane(mainPanel);
         mainContainer.add(scrollPane, BorderLayout.CENTER);
-    }
-
-    private void allButtonCreation() {
-        createBasicButtons();
-        createButtons(pd.getTitles(), gbc);
-    }
-
-    private void createBasicButtons() {
-        if(southPanel != null)
-            remove(southPanel);
-        createButton = new JButton("Create New Note");
-        southPanel = new JPanel();
-        southPanel.add(createButton);
-        mainContainer.add(southPanel, BorderLayout.SOUTH);
-        createButton.addActionListener(handler);
-        gbc.gridy++;
     }
 
     private void removeOldComponents() {
@@ -94,6 +82,17 @@ public class ListFrame extends JFrame {
         delete.addActionListener(handler);
         deleteButtons.add(delete);
 
+        gbc.gridy++;
+    }
+
+    private void SetUpSouthPanel() {
+        if(southPanel != null)
+            remove(southPanel);
+        createButton = new JButton("Create New Note");
+        southPanel = new JPanel();
+        southPanel.add(createButton);
+        mainContainer.add(southPanel, BorderLayout.SOUTH);
+        createButton.addActionListener(handler);
         gbc.gridy++;
     }
 
