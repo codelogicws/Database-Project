@@ -10,10 +10,10 @@ public class Main {
 
     public static void main(String[] args){
         PersistentData persistentData = MySQLHome.createHomeSQLDatabase();
-//        Note myNote = new Note("Java", "new note");
-//        persistentData.insert(myNote);
+        Note myNote = new Note("Java", "new note");
+        persistentData.insert(myNote);
         String[] titles = persistentData.getTitles();
-        System.out.println("Debug-Main: " + Arrays.toString(titles));
+        Note note = persistentData.getNote(3);
         persistentData.close();
     }
 

@@ -15,14 +15,13 @@ public class MySQLHome implements PersistentData{
     private static final String NOTETABLE = "note";
 
     public static MySQLHome createHomeSQLDatabase(){
-        String password = "temp dummy for debug";
-//        String password = getPassword();
+        String password = getPassword();
         return new MySQLHome(password);
     }
 
     private MySQLHome(String password){
         try{
-            setUpConnection();
+            setUpConnection(password);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -31,14 +30,14 @@ public class MySQLHome implements PersistentData{
 
     }
 
-    private void setUpConnection() throws ClassNotFoundException, SQLException {
+    private void setUpConnection(String password) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
         connection = DriverManager.getConnection("jdbc:mysql://" +
                 "z3r0.info" +
                 "/db_app?" +
                 "user=app&" +
                 "password=" +
-                "0p3nAcc355" +
+                password +
                 "&noAccessToProcedureBodies=true");
         createCallableStatements();
         System.out.println("Connected");
@@ -162,7 +161,7 @@ public class MySQLHome implements PersistentData{
     public Note getNote(int index) {
         int id = lastKnowenIds[index];
         Note note = new Note(getTitle(id), getNoteContent(id));
-        return null;
+        return note;
     }
 
     private String getTitle(int id) {
@@ -174,18 +173,18 @@ public class MySQLHome implements PersistentData{
     }
 
     private String getElement(int id, String columnAndTable) {
+        String element = null;
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("SELECT " + columnAndTable + " FROM " + columnAndTable + " WHERE id = " + id);
-            System.out.println("Debug-MySQLHome: " + "SELECT " + columnAndTable + " FROM " + columnAndTable + " WHERE id = " + id);
-
-//            while(rs.next()){
-//
-//            }
+            while(rs.next()){
+                element = rs.getString(columnAndTable);
+                break;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return "debug";
+        return element;
     }
 
     public static String getPassword(){
