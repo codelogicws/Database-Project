@@ -15,7 +15,7 @@ public class EditFrame extends JFrame {
     private JButton save;
     private ActionListener handler;
 
-    public EditFrame(String title, String titleOfNote, String note, CreateNew.Handler handler) {
+    public EditFrame(String title, String titleOfNote, String note, ActionListener handler) {
         super(title);
         this.handler = handler;
         this.titleOfNote = titleOfNote;

@@ -3,19 +3,20 @@ package ws.codelogic.databasetest.gui;
 import ws.codelogic.databasetest.gui.controller.CreateNew;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
 
 public class EditGUI {
 
     public EditFrame frame;
 
-    public void makeWindow(String title, String note, CreateNew.Handler handler){
+    public void makeWindow(String title, String note, ActionListener handler){
 
         frame = new EditFrame("Note Access", title, note, handler);
         SwingUtilities.invokeLater(listWindow());
 
     }
 
-    public void makeWindow(CreateNew.Handler handler) {
+    public void makeWindow(ActionListener handler) {
         makeWindow("", "", handler);
     }
 

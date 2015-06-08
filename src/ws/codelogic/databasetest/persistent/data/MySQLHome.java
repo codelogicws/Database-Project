@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class MySQLHome implements PersistentData{
 
+    private static MySQLHome mySQLHome = null;
     private Connection connection;
     private CallableStatement addNote;
     private CallableStatement removeNote;
@@ -15,9 +16,10 @@ public class MySQLHome implements PersistentData{
     private static final String NOTETABLE = "note";
 
     public static MySQLHome createHomeSQLDatabase(){
-//        String password = getPassword();
-        //temp password
-        return new MySQLHome("0p3nAcc355");
+        if(mySQLHome == null){
+            mySQLHome = new MySQLHome("0p3nAcc355");
+        }
+        return mySQLHome;
     }
 
     private MySQLHome(String password){
@@ -87,6 +89,22 @@ public class MySQLHome implements PersistentData{
     public void insert(Note note) {
         try {
             doInsert(note);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void editNote(int id, Note note) {
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("UPDATE title SET title = '" +
+                    note.getTitle() + "' where id = " + lastKnowenIds[id]);
+            Statement statement2 = connection.createStatement();
+            statement.executeUpdate("UPDATE note SET note = '" +
+                    note.getContent() + "' where id = " + lastKnowenIds[id]);
+            statement.close();
+            statement2.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
