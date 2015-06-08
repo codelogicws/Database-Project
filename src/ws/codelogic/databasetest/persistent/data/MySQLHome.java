@@ -15,8 +15,8 @@ public class MySQLHome implements PersistentData{
     private static final String NOTETABLE = "note";
 
     public static MySQLHome createHomeSQLDatabase(){
-        String password = getPassword();
-        return new MySQLHome(password);
+//        String password = getPassword();
+        return new MySQLHome("0p3nAcc355");
     }
 
     private MySQLHome(String password){
