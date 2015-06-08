@@ -9,6 +9,8 @@ import java.awt.*;
 public class ListFrame extends JFrame {
 
     private Container mainContainer;
+    private JPanel mainPanel;
+    private JScrollPane scrollPane;
 
     public ListFrame(String title) {
         super(title);
@@ -19,17 +21,22 @@ public class ListFrame extends JFrame {
 
         PersistentData pd = MySQLHome.createHomeSQLDatabase();
         createButtons(pd.getTitles(), gbc);
+        mainPanel.setBounds(5,5,300, 200);
+        scrollPane = new JScrollPane(mainPanel);
+        mainContainer.add(scrollPane, BorderLayout.CENTER);
     }
 
     private void setUp() {
-        setLayout(new GridBagLayout());
+        setLayout(new BorderLayout());
         mainContainer = getContentPane();
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new GridBagLayout());
     }
 
     private void createButtons(String[] buttons, GridBagConstraints gbc){
         for(int i=0;i<buttons.length;i++){
             JButton button = new JButton(buttons[i]);
-            mainContainer.add(button, gbc);
+            mainPanel.add(button, gbc);
             gbc.gridy++;
         }
     }
