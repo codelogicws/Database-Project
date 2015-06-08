@@ -11,7 +11,7 @@ public class MySQLHome implements PersistentData{
     private Connection connection;
     private CallableStatement addNote;
     private CallableStatement removeNote;
-    private int[] lastKnowenIds;
+    private int[] lastKnownIds;
 
     public static MySQLHome mySQLHomeSingleton(){
         if(mySQLHome == null){
@@ -23,9 +23,7 @@ public class MySQLHome implements PersistentData{
     private MySQLHome(String password){
         try{
             setUpConnection(password);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
 
@@ -97,10 +95,10 @@ public class MySQLHome implements PersistentData{
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate("UPDATE title SET title = '" +
-                    note.getTitle() + "' where id = " + lastKnowenIds[id]);
+                    note.getTitle() + "' where id = " + lastKnownIds[id]);
             Statement statement2 = connection.createStatement();
             statement.executeUpdate("UPDATE note SET note = '" +
-                    note.getContent() + "' where id = " + lastKnowenIds[id]);
+                    note.getContent() + "' where id = " + lastKnownIds[id]);
             statement.close();
             statement2.close();
         } catch (SQLException e) {
@@ -117,7 +115,7 @@ public class MySQLHome implements PersistentData{
     @Override
     public void removeNote(int index){
         try {
-            doRemoveNote(lastKnowenIds[index]);
+            doRemoveNote(lastKnownIds[index]);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -145,11 +143,11 @@ public class MySQLHome implements PersistentData{
         ResultSet newResults = newStatement.executeQuery("SELECT id, title FROM title");
         int tableCount = getTableCount();
         titles = new String[tableCount];
-        lastKnowenIds = new int[tableCount];
+        lastKnownIds = new int[tableCount];
         int index = 0;
         while(newResults.next()){
             titles[index] = newResults.getString("title");
-            lastKnowenIds[index] = newResults.getInt("id");
+            lastKnownIds[index] = newResults.getInt("id");
             index++;
         }
         close(newStatement, newResults);
@@ -177,7 +175,7 @@ public class MySQLHome implements PersistentData{
 
     @Override
     public Note getNote(int index) {
-        int id = lastKnowenIds[index];
+        int id = lastKnownIds[index];
         return new Note(getTitle(id), getNoteContent(id));
     }
 

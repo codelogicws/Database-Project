@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class ListFrame extends JFrame {
+class ListFrame extends JFrame {
 
     private Container mainContainer;
     private JPanel mainPanel;
