@@ -5,9 +5,13 @@ import java.awt.*;
 
 public class EditFrame extends JFrame {
     private final Container mainContainer;
+    private final String note;
+    private String titleOfNote;
 
-    public EditFrame(String title) {
+    public EditFrame(String title, String titleOfNote, String note) {
         super(title);
+        this.titleOfNote = titleOfNote;
+        this.note = note;
         setLayout(new BorderLayout());
         mainContainer = getContentPane();
 
@@ -15,8 +19,8 @@ public class EditFrame extends JFrame {
     }
 
     private void createTextFields() {
-        JTextArea textArea = new JTextArea();
-        JTextField textField = new JTextField();
+        JTextField textField = new JTextField(titleOfNote);
+        JTextArea textArea = new JTextArea(note);
         JButton save = new JButton("Save");
 
         mainContainer.add(textField, BorderLayout.NORTH);

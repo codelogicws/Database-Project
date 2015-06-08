@@ -1,5 +1,6 @@
 package ws.codelogic.databasetest.gui;
 
+import ws.codelogic.databasetest.data.Note;
 import ws.codelogic.databasetest.persistent.data.MySQLHome;
 import ws.codelogic.databasetest.persistent.data.PersistentData;
 
@@ -86,6 +87,9 @@ public class ListFrame extends JFrame {
             for(int i=0;i< noteButtons.size();i++){
                 if(e.getSource()== noteButtons.get(i)){
                     System.out.println("Debug-TheHandler: " + i);
+                    Note note = pd.getNote(i);
+                    EditGUI editGUI = new EditGUI();
+                    editGUI.makeWindow(note.getTitle(), note.getContent());
                 }
             }
             for(int i=0;i<deleteButtons.size();i++){
