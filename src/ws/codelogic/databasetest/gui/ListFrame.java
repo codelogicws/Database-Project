@@ -110,11 +110,12 @@ public class ListFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource()==createButton){
-                System.out.println("Debug-Handler: trying to create a new item");
-                CreateNew createNew = new CreateNew();
-                createNew.createNewWindow();
-            }
+            checkForNoteCreationClick(e);
+            checkForNoteButtonClick(e);
+            checkForDeleteButtonClick(e);
+        }
+
+        private void checkForNoteButtonClick(ActionEvent e) {
             for(int i=0;i< noteButtons.size();i++){
                 if(e.getSource()== noteButtons.get(i)){
                     Note note = pd.getNote(i);
@@ -122,11 +123,22 @@ public class ListFrame extends JFrame {
                     editNote.createNewWindow();
                 }
             }
+        }
+
+        private void checkForDeleteButtonClick(ActionEvent e) {
             for(int i=0;i<deleteButtons.size();i++){
                 if(e.getSource()== deleteButtons.get(i)){
                     pd.removeNote(i);
                     ListGUI.listSingleton().update();
                 }
+            }
+        }
+
+        private void checkForNoteCreationClick(ActionEvent e) {
+            if(e.getSource()==createButton){
+                System.out.println("Debug-Handler: trying to create a new item");
+                CreateNew createNew = new CreateNew();
+                createNew.createNewWindow();
             }
         }
     }
