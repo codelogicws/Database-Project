@@ -203,9 +203,8 @@ public class MySQLHome implements PersistentData{
         String element = null;
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery("SELECT " + columnAndTable + " FROM " + columnAndTable + " WHERE id = " + id);
-        while(rs.next()){
+        if(rs.next()){
             element = rs.getString(columnAndTable);
-            break;
         }
         return element;
     }
