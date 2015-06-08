@@ -27,8 +27,18 @@ public class ListFrame extends JFrame {
 
     public ListFrame() {
         super("Database Note Access");
+        initCloseListener();
         pd = MySQLHome.mySQLHomeSingleton();
         refresh();
+    }
+
+    private void initCloseListener() {
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                pd.close();
+                System.exit(0);
+            }
+        });
     }
 
     public void refresh() {

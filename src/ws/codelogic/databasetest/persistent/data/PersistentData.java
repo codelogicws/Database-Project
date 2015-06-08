@@ -9,5 +9,6 @@ public interface PersistentData {
     void removeNote(int id);
     String[] getTitles();
     Note getNote(int i);
+    void close();
 
 }
