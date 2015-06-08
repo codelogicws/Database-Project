@@ -21,7 +21,7 @@ public class EditNote {
     }
 
     public void createNewWindow(){
-        pd = MySQLHome.createHomeSQLDatabase();
+        pd = MySQLHome.mySQLHomeSingleton();
         editFrame = new EditGUI();
         editFrame.makeWindow(note.getTitle(), note.getContent(), new EditHandler());
     }

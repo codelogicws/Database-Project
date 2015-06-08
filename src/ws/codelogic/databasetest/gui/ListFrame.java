@@ -18,11 +18,12 @@ public class ListFrame extends JFrame {
     private JPanel mainPanel;
     private JScrollPane scrollPane;
     private GridBagConstraints gbc;
-    private TheHandler handler;
+    private Handler handler;
     private PersistentData pd;
     private ArrayList<JButton> noteButtons;
     private ArrayList<JButton> deleteButtons;
     private JButton createButton;
+    private JPanel southPanel;
 
     public ListFrame() {
         super("Database Note Access");
@@ -36,19 +37,21 @@ public class ListFrame extends JFrame {
     }
 
     private void oneTimeSetUp() {
-        handler = new TheHandler();
-        pd = MySQLHome.createHomeSQLDatabase();
+        pd = MySQLHome.mySQLHomeSingleton();
     }
 
     private void createBasicButtons() {
         createButton = new JButton("Create New Note");
-        mainContainer.add(createButton, BorderLayout.SOUTH);
+        southPanel = new JPanel();
+        southPanel.add(createButton);
+        mainContainer.add(southPanel, BorderLayout.SOUTH);
         createButton.addActionListener(handler);
         gbc.gridy++;
     }
 
     public void refresh() {
-        removeOldScrollPane();
+        handler = new Handler();
+        removeOldComponents();
         setLayout(new BorderLayout());
         mainContainer = getContentPane();
         noteButtons = new ArrayList<>();
@@ -64,10 +67,11 @@ public class ListFrame extends JFrame {
         mainContainer.add(scrollPane, BorderLayout.CENTER);
     }
 
-    private void removeOldScrollPane() {
-        if(scrollPane != null){
+    private void removeOldComponents() {
+        if(scrollPane != null)
             remove(scrollPane);
-        }
+        if(southPanel != null)
+            remove(southPanel);
     }
 
     private void createButtons(String[] buttons, GridBagConstraints gbc){
@@ -92,11 +96,12 @@ public class ListFrame extends JFrame {
         gbc.gridy++;
     }
 
-    private class TheHandler implements ActionListener {
+    private class Handler implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource()==createButton){
+                System.out.println("Debug-Handler: trying to create a new item");
                 CreateNew createNew = new CreateNew();
                 createNew.createNewWindow();
             }

@@ -15,7 +15,7 @@ public class MySQLHome implements PersistentData{
     private static final String TITLETABLE = "title";
     private static final String NOTETABLE = "note";
 
-    public static MySQLHome createHomeSQLDatabase(){
+    public static MySQLHome mySQLHomeSingleton(){
         if(mySQLHome == null){
             mySQLHome = new MySQLHome("0p3nAcc355");
         }
@@ -193,14 +193,19 @@ public class MySQLHome implements PersistentData{
     private String getElement(int id, String columnAndTable) {
         String element = null;
         try {
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT " + columnAndTable + " FROM " + columnAndTable + " WHERE id = " + id);
-            while(rs.next()){
-                element = rs.getString(columnAndTable);
-                break;
-            }
+            element = doGetElement(id, columnAndTable, element);
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        return element;
+    }
+
+    private String doGetElement(int id, String columnAndTable, String element) throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery("SELECT " + columnAndTable + " FROM " + columnAndTable + " WHERE id = " + id);
+        while(rs.next()){
+            element = rs.getString(columnAndTable);
+            break;
         }
         return element;
     }

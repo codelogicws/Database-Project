@@ -15,7 +15,7 @@ public class CreateNew {
     private EditGUI editFrame;
 
     public void createNewWindow(){
-        pd = MySQLHome.createHomeSQLDatabase();
+        pd = MySQLHome.mySQLHomeSingleton();
         editFrame = new EditGUI();
         editFrame.makeWindow(new Handler());
     }
