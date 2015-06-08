@@ -69,8 +69,8 @@ public class ListFrame extends JFrame {
     }
 
     private void createButtons(String[] buttons, GridBagConstraints gbc){
-        for(int i=0;i<buttons.length;i++){
-            createButtonPairForNote(buttons[i], gbc);
+        for (String button : buttons) {
+            createButtonPairForNote(button, gbc);
         }
     }
 

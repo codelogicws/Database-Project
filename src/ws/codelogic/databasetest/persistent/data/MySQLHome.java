@@ -178,8 +178,7 @@ public class MySQLHome implements PersistentData{
     @Override
     public Note getNote(int index) {
         int id = lastKnowenIds[index];
-        Note note = new Note(getTitle(id), getNoteContent(id));
-        return note;
+        return new Note(getTitle(id), getNoteContent(id));
     }
 
     private String getTitle(int id) {

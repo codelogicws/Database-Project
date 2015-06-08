@@ -48,10 +48,10 @@ public class EditFrame extends JFrame {
     }
 
     public String getNote() {
-        return textArea.getText().toString();
+        return textArea.getText();
     }
 
     public String getNoteTitle() {
-        return textField.getText().toString();
+        return textField.getText();
     }
 }

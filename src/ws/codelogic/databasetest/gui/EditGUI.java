@@ -1,7 +1,5 @@
 package ws.codelogic.databasetest.gui;
 
-import ws.codelogic.databasetest.gui.controller.CreateNew;
-
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
