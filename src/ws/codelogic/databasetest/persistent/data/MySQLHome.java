@@ -1,6 +1,7 @@
 package ws.codelogic.databasetest.persistent.data;
 
 import ws.codelogic.databasetest.data.Note;
+import ws.codelogic.databasetest.gui.popup.PasswordRetriever;
 
 import java.sql.*;
 import java.util.Scanner;
@@ -15,7 +16,7 @@ public class MySQLHome implements PersistentData{
 
     public static MySQLHome mySQLHomeSingleton(){
         if(mySQLHome == null){
-            mySQLHome = new MySQLHome("0p3nAcc355");
+            mySQLHome = new MySQLHome(getPassword());
         }
         return mySQLHome;
     }
@@ -208,8 +209,7 @@ public class MySQLHome implements PersistentData{
     }
 
     public static String getPassword(){
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Enter Password");
-        return reader.next();
+        PasswordRetriever retriever = new PasswordRetriever();
+        return retriever.getPassword();
     }
 }
