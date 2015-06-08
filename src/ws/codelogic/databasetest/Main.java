@@ -19,7 +19,7 @@ public class Main {
 //        String[] titles = persistentData.getTitles();
 //        Note note = persistentData.getNote(3);
 //        persistentData.close();
-        ListGUI gui = new ListGUI();
+        ListGUI gui = ListGUI.listSingleton();
         gui.makeWindow();
     }
 

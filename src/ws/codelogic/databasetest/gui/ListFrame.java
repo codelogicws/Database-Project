@@ -24,36 +24,50 @@ public class ListFrame extends JFrame {
     private ArrayList<JButton> deleteButtons;
     private JButton createButton;
 
-    public ListFrame(String title) {
-        super(title);
-        setUp();
+    public ListFrame() {
+        super("Database Note Access");
+        oneTimeSetUp();
+        refresh();
+    }
+
+    private void allButtonCreation() {
         createBasicButtons();
         createButtons(pd.getTitles(), gbc);
-        mainPanel.setBounds(5,5,300, 200);
-        scrollPane = new JScrollPane(mainPanel);
-        mainContainer.add(scrollPane, BorderLayout.CENTER);
+    }
 
+    private void oneTimeSetUp() {
+        handler = new TheHandler();
+        pd = MySQLHome.createHomeSQLDatabase();
     }
 
     private void createBasicButtons() {
         createButton = new JButton("Create New Note");
-        mainPanel.add(createButton, gbc);
+        mainContainer.add(createButton, BorderLayout.SOUTH);
         createButton.addActionListener(handler);
         gbc.gridy++;
     }
 
-    private void setUp() {
-        handler = new TheHandler();
-        pd = MySQLHome.createHomeSQLDatabase();
-        noteButtons = new ArrayList<>();
-        deleteButtons = new ArrayList<>();
+    public void refresh() {
+        removeOldScrollPane();
         setLayout(new BorderLayout());
         mainContainer = getContentPane();
+        noteButtons = new ArrayList<>();
+        deleteButtons = new ArrayList<>();
         mainPanel = new JPanel();
         mainPanel.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(5,5,5,5);
         gbc.gridy = 0;
+        allButtonCreation();
+        mainPanel.setBounds(5,5,300, 200);
+        scrollPane = new JScrollPane(mainPanel);
+        mainContainer.add(scrollPane, BorderLayout.CENTER);
+    }
+
+    private void removeOldScrollPane() {
+        if(scrollPane != null){
+            remove(scrollPane);
+        }
     }
 
     private void createButtons(String[] buttons, GridBagConstraints gbc){
@@ -96,6 +110,7 @@ public class ListFrame extends JFrame {
             for(int i=0;i<deleteButtons.size();i++){
                 if(e.getSource()== deleteButtons.get(i)){
                     pd.removeNote(i);
+                    ListGUI.listSingleton().update();
                 }
             }
         }

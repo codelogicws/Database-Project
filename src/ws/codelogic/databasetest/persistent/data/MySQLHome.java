@@ -43,7 +43,6 @@ public class MySQLHome implements PersistentData{
                 password +
                 "&noAccessToProcedureBodies=true");
         createCallableStatements();
-        System.out.println("Connected");
     }
 
     public void close(){

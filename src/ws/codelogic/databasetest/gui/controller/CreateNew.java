@@ -2,6 +2,7 @@ package ws.codelogic.databasetest.gui.controller;
 
 import ws.codelogic.databasetest.data.Note;
 import ws.codelogic.databasetest.gui.EditGUI;
+import ws.codelogic.databasetest.gui.ListGUI;
 import ws.codelogic.databasetest.persistent.data.MySQLHome;
 import ws.codelogic.databasetest.persistent.data.PersistentData;
 
@@ -25,6 +26,7 @@ public class CreateNew {
         public void actionPerformed(ActionEvent e) {
             Note note = new Note(editFrame.frame.getNoteTitle(), editFrame.frame.getNote());
             pd.insert(note);
+            ListGUI.listSingleton().update();
             close();
         }
 
