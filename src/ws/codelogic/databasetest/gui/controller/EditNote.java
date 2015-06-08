@@ -30,6 +30,7 @@ public class EditNote {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            System.out.println("Debug-EditHandler: edit note attempt");
             Note note = new Note(editFrame.frame.getNoteTitle(), editFrame.frame.getNote());
             pd.editNote(noteIndex, note);
             ListGUI.listSingleton().update();

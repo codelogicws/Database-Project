@@ -44,26 +44,33 @@ public class ListFrame extends JFrame {
     }
 
     private void SetUpCenterPanel() {
-        noteButtons = new ArrayList<>();
-        deleteButtons = new ArrayList<>();
+        init();
         setUpMainPanel();
         createButtons(pd.getTitles(), gbc);
         setUpScrollPane();
-        mainContainer.add(scrollPane, BorderLayout.CENTER);
+    }
+
+    private void init() {
+        noteButtons = new ArrayList<>();
+        deleteButtons = new ArrayList<>();
     }
 
     private void setUpMainPanel() {
         mainPanel = new JPanel();
+        setUpGridBagLayout();
+        mainPanel.setBounds(5,5,300, 200);
+    }
+
+    private void setUpGridBagLayout() {
         mainPanel.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(5,5,5,5);
         gbc.gridy = 0;
-        mainPanel.setBounds(5,5,300, 200);
     }
 
     private void createButtons(String[] buttons, GridBagConstraints gbc){
         for(int i=0;i<buttons.length;i++){
-            createNoteButton(buttons[i], gbc);
+            createButtonPairForNote(buttons[i], gbc);
         }
     }
 
@@ -71,9 +78,10 @@ public class ListFrame extends JFrame {
         if(scrollPane != null)
             remove(scrollPane);
         scrollPane = new JScrollPane(mainPanel);
+        mainContainer.add(scrollPane, BorderLayout.CENTER);
     }
 
-    private void createNoteButton(String name, GridBagConstraints gbc) {
+    private void createButtonPairForNote(String name, GridBagConstraints gbc) {
         gbc.gridx = 0;
         JButton button = new JButton(name);
         mainPanel.add(button, gbc);
