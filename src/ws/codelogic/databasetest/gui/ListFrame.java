@@ -27,33 +27,20 @@ public class ListFrame extends JFrame {
 
     public ListFrame() {
         super("Database Note Access");
-        oneTimeSetUp();
+        pd = MySQLHome.mySQLHomeSingleton();
         refresh();
     }
 
-    private void allButtonCreation() {
-        createBasicButtons();
-        createButtons(pd.getTitles(), gbc);
-    }
-
-    private void oneTimeSetUp() {
-        pd = MySQLHome.mySQLHomeSingleton();
-    }
-
-    private void createBasicButtons() {
-        createButton = new JButton("Create New Note");
-        southPanel = new JPanel();
-        southPanel.add(createButton);
-        mainContainer.add(southPanel, BorderLayout.SOUTH);
-        createButton.addActionListener(handler);
-        gbc.gridy++;
-    }
-
     public void refresh() {
+        //Action Listener
         handler = new Handler();
-        removeOldComponents();
+
+        //Main Container
         setLayout(new BorderLayout());
         mainContainer = getContentPane();
+
+        //ScrollPanel
+        removeOldComponents();
         noteButtons = new ArrayList<>();
         deleteButtons = new ArrayList<>();
         mainPanel = new JPanel();
@@ -67,11 +54,25 @@ public class ListFrame extends JFrame {
         mainContainer.add(scrollPane, BorderLayout.CENTER);
     }
 
+    private void allButtonCreation() {
+        createBasicButtons();
+        createButtons(pd.getTitles(), gbc);
+    }
+
+    private void createBasicButtons() {
+        if(southPanel != null)
+            remove(southPanel);
+        createButton = new JButton("Create New Note");
+        southPanel = new JPanel();
+        southPanel.add(createButton);
+        mainContainer.add(southPanel, BorderLayout.SOUTH);
+        createButton.addActionListener(handler);
+        gbc.gridy++;
+    }
+
     private void removeOldComponents() {
         if(scrollPane != null)
             remove(scrollPane);
-        if(southPanel != null)
-            remove(southPanel);
     }
 
     private void createButtons(String[] buttons, GridBagConstraints gbc){
