@@ -1,23 +1,28 @@
 package ws.codelogic.databasetest.gui;
 
+import ws.codelogic.databasetest.gui.controller.CreateNew;
+
 import javax.swing.*;
 
 public class EditGUI {
 
-    public void makeWindow(String title, String note){
+    public EditFrame frame;
 
-        SwingUtilities.invokeLater(listWindow(title, note));
+    public void makeWindow(String title, String note, CreateNew.Handler handler){
+
+        frame = new EditFrame("Note Access", title, note, handler);
+        SwingUtilities.invokeLater(listWindow());
 
     }
 
-    public void makeWindow() {
-        makeWindow("", "");
+    public void makeWindow(CreateNew.Handler handler) {
+        makeWindow("", "", handler);
     }
 
-    private Runnable listWindow(String title, String note) {
+    private Runnable listWindow() {
         return new Runnable(){
+
             public void run(){
-                JFrame frame = new EditFrame("Note Access", title, note);
                 frame.setSize(300, 500);
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.setVisible(true);
