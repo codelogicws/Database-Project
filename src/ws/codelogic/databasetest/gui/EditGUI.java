@@ -2,7 +2,7 @@ package ws.codelogic.databasetest.gui;
 
 import javax.swing.*;
 
-public class ListGUI {
+public class EditGUI {
 
     public void makeWindow(){
 
@@ -13,9 +13,9 @@ public class ListGUI {
     private Runnable listWindow() {
         return new Runnable(){
             public void run(){
-                JFrame frame = new ListFrame("Note Access");
+                JFrame frame = new EditFrame("Note Access");
                 frame.setSize(300, 500);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.setVisible(true);
             }
         };

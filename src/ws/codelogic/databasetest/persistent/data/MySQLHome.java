@@ -126,7 +126,7 @@ public class MySQLHome implements PersistentData{
     private String[] doGetTitle(String[] titles) throws SQLException {
         Statement newStatement = connection.createStatement();
         ResultSet newResults = newStatement.executeQuery("SELECT id, title FROM title");
-        int tableCount = tableCount();
+        int tableCount = getTableCount();
         titles = new String[tableCount];
         lastKnowenIds = new int[tableCount];
         int index = 0;
@@ -139,7 +139,7 @@ public class MySQLHome implements PersistentData{
         return titles;
     }
 
-    private int tableCount(){
+    public int getTableCount(){
         int count = 0;
         try {
             count = doTableCount(count);

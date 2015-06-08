@@ -10,9 +10,9 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args){
-        PersistentData persistentData = MySQLHome.createHomeSQLDatabase();
-        Note myNote = new Note("more notes of course", "my new entry note");
-        persistentData.insert(myNote);
+//        PersistentData persistentData = MySQLHome.createHomeSQLDatabase();
+//        Note myNote = new Note("more notes of course", "my new entry note");
+//        persistentData.insert(myNote);
 //        String[] titles = persistentData.getTitles();
 //        Note note = persistentData.getNote(3);
 //        persistentData.close();
