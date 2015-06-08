@@ -73,13 +73,13 @@ public class MySQLHome implements PersistentData{
 
     private void createCallableStatements() {
         try {
-            createCallables();
+            createCallable();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private void createCallables() throws SQLException {
+    private void createCallable() throws SQLException {
         addNote = connection.prepareCall("{call addNote(?, ?)}");
         removeNote = connection.prepareCall("{call removeNote(?)}");
     }
@@ -124,8 +124,8 @@ public class MySQLHome implements PersistentData{
         }
     }
 
-    private void doRemoveNote(int lastKnowenId) throws SQLException {
-        removeNote.setInt(1, lastKnowenId);
+    private void doRemoveNote(int lastKnownId) throws SQLException {
+        removeNote.setInt(1, lastKnownId);
         removeNote.executeQuery();
     }
 
@@ -193,14 +193,15 @@ public class MySQLHome implements PersistentData{
     private String getElement(int id, String columnAndTable) {
         String element = null;
         try {
-            element = doGetElement(id, columnAndTable, element);
+            element = doGetElement(id, columnAndTable);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return element;
     }
 
-    private String doGetElement(int id, String columnAndTable, String element) throws SQLException {
+    private String doGetElement(int id, String columnAndTable) throws SQLException {
+        String element = null;
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery("SELECT " + columnAndTable + " FROM " + columnAndTable + " WHERE id = " + id);
         while(rs.next()){

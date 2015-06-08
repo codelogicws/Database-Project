@@ -136,7 +136,6 @@ public class ListFrame extends JFrame {
 
         private void checkForNoteCreationClick(ActionEvent e) {
             if(e.getSource()==createButton){
-                System.out.println("Debug-Handler: trying to create a new item");
                 CreateNew createNew = new CreateNew();
                 createNew.createNewWindow();
             }

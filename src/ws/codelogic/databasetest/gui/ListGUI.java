@@ -27,7 +27,7 @@ public class ListGUI {
             public void run(){
                 frame = new ListFrame();
                 frame.setSize(300, 500);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                 frame.setVisible(true);
             }
         };
